@@ -1,0 +1,37 @@
+<HTML>
+    <HEAD>
+     <TITLE>Employee List</TITLE>
+    </HEAD>
+    <BODY>
+     <!--- output number of records in query results --->
+     <CFOUTPUT>
+      <!--- the 'RecordCount' variable is automatically 
+   created --->
+      <B>#qStaffList.RecordCount#</B> Employees Found
+     </CFOUTPUT>
+     <!--- begin the output table --->
+     <TABLE BORDER="1">
+      <!--- table header row --->
+      <TR BGCOLOR="#FFFF80">
+       <TH>No.</TH>
+       <TH>Last Name</TH>
+       <TH>First Name</TH>
+       <TH>Ext.</TH>
+      </TR>
+      <!--- output query information--->
+      <CFOUTPUT QUERY="qStaffList">
+      <!--- since this row is inside a cfoutput block,
+         it loops to create a new row for each record--->
+      <TR>
+       <!--- the 'CurrentRow' variable is automatically 
+   created --->
+       <TD>#CurrentRow#</TD>
+       <TD><B>#LastName#</B></TD> 
+       <TD>#FirstName#</TD>
+       <TD>#Extension#</TD>
+      </TR>
+      </CFOUTPUT>
+     </TABLE>
+     <!--- end table output --->
+    </BODY>
+   </HTML>
