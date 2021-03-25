@@ -1,29 +1,164 @@
 from django.shortcuts import render, redirect
+#from django.contrib import messages
+#from django.contrib.auth.models import  User, auth
+from django.http import HttpResponse
+from django.forms import inlineformset_factory
+#from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth.models import  User, auth
+
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+from .models import *
+from .forms import EmployeeForm,CreateUserForm
+#from .filters import EmployeeFilter
 
-def login(request):
-    if request.method =='POST':
-        username = request.POST['username']
-        password = request.POST['password']
 
-        user = auth.authenticate(username = username, password = password)
 
-        if user is not None:
-            auth.login(request, user)
-            return redirect("/")
-        else:
-            messages.info(request,'invalid credientials')
-            return redirect('login')
+def registerPage(request):
+    form = CreateUserForm()
+    
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
 
+            user = form.cleaned_data.get('username')
+            messages.success(request,"Account was created for "+ user)
+    context = {'form':form}
+    return render(request,'register.html', context)
+
+
+
+
+
+def loginPage(request):
+		if request.method == 'POST':
+			username = request.POST.get('username')
+			password =request.POST.get('password')
+
+			user = authenticate(request, username=username, password=password)
+
+			if user is not None:
+				login(request, user)
+				return redirect('home')
+			else:
+				messages.info(request, 'Username OR password is incorrect')
+
+		context = {}
+		return render(request, 'login.html', context)
+
+def logoutUser(request):
+	logout(request)
+	return redirect('login')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''from Employee.forms import EmployeeForm
+from Employee.models import Employee
+
+# Create your views here.
+def emp(request):
+    if request.method == "POST":
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/view')
+            except:
+                pass
     else:
-        return render(request,'employee_login.html')
+        form = EmployeeForm()
+    return render(request, 'index.html',{'form':form})
+
+def view(request):
+    employee = Employee.objects.all()
+    return render(request,'view.html',{'Employee':Employee})
+
+def delete(reuqest,id):
+    Employee = Employee.objects.get(id=id)
+    Employee.delete()
+    return redirect("/view")
 
 
 
-def register(request):
+def edit(reuqest,id):
+    Employee = Employee.objects.get(id=id)
+    return render(request,'edit.html',{'Employee':Employee})'''
+
+
+'''def register(request):
 
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -52,10 +187,29 @@ def register(request):
         return redirect('/')
     else:
         return render(request,'employee_registration.html')
+        #return redirect(login)
+
+
+def login(request):
+    if request.method =='POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username = username, password = password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect("/")
+        else:
+            messages.info(request,'invalid credientials')
+            return redirect('login')
+
+    else:
+        return render(request,'employee_login.html')
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    return redirect('/')'''
 
 
 

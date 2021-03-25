@@ -15,10 +15,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+#from * import views
+from Employee import views
 
-urlpatterns = [
+'''urlpatterns = [
     path('admin/', admin.site.urls),
     #path('',include('attendance.urls')),
     path('company/',include('company.urls')),
+    #path('Employee/', include('Employee.urls')),
+    path('emp/',views.emp),
+    path('view/',views.view),
+    path ('delete/<int:id>',views.delete),
+    path('edit/<int:id>',views.edit),
+    
+    #url(r'^api-auth/',include('rest-framework.urls',namespace='rest_framework')),
+   # url(r'^api/', include(router.urls)),
+
+]
+
+#urlpatterns = urlpatterns + '''
+
+
+urlpatterns = [
+     path('admin/', admin.site.urls),
+	path('register/', views.registerPage, name="register"),
+	path('login/', views.loginPage, name="login"),  
+	path('logout/', views.logoutUser, name="logout"),
     path('Employee/', include('Employee.urls'))
 ]

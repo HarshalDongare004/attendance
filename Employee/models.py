@@ -4,17 +4,17 @@ from django.db import models
 from datetime import datetime, timedelta 
 class Employee(models.Model):  
      
-    first_name = models.CharField(max_length=100)  
-    middle_name = models.CharField(max_length = 20)
-    last_name =  models.CharField(max_length = 20)
-    mobile_number = models.IntegerField(max_length=13)
-    address = models.CharField(max_length=200)
-    email = models.EmailField()  
-    date = models.DateTimeField(default=datetime.now()+ timedelta(days =30))
+    employee_name = models.CharField(max_length=100, null=True)  
+    mobile_number = models.CharField(max_length=200, null= True)
+    #address = models.CharField(max_length=200, null=True)
+    email = models.EmailField(max_length=200, null=True)  
+    #date = models.DateTimeField(default=datetime.now()+ timedelta(days =30))
     
-
+    def __str__(self):
+        return self.employee_name
+   
     class Meta:  
-        db_table = "Employee" 
+        db_table = "Employee"
 
 
 

@@ -84,7 +84,7 @@ DATABASES = {
         "PASSWORD": "Harsh@123",
         "HOST": "127.0.0.1",  #'127.0.0.1',   # Or an IP Address that your DB is hosted on
         "PORT": "3306",
-        "NAME": "my_attendance",}
+        "NAME": "my_attendance"}
         }
     
 
@@ -126,4 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR,"static")
+
+
